@@ -9,16 +9,12 @@ description 'Simple console UI elements'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://maven.pkg.github.com/sukhinin'
-    }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
-    testImplementation 'io.kotest:kotest-runner-junit5-jvm:4.3.2'
+    testImplementation 'io.kotest:kotest-runner-junit5:4.4.3'
     testImplementation 'io.mockk:mockk:1.11.0'
 }
 
@@ -43,18 +39,8 @@ jgitver {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/sukhinin/simple-console")
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
     publications {
-        gpr(MavenPublication) {
+        maven(MavenPublication) {
             from(components.java)
         }
     }
